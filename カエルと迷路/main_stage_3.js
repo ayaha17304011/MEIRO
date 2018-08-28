@@ -546,6 +546,18 @@ function ending(){
 		vide.className = '';
 		videe.ended = window.location.href="gamestart.html" ; 
 	});
+videe.addEventListener('pause',function(){
+		videe.className = '';
+		videe.pause = window.location.href="gamestart.html" ; 
+	});	
+	document.onkeydown=function(e){  //对整个页面文档监听 
+	var keyNum=window.event ? e.keyCode :e.which;  //获取被按下的键值 
+
+	if(keyNum==13){ 
+	videe.pause();
+		
+		}
+	} 	
 }
 
 
