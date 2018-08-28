@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<TITLE>迷路</TITLE>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+	<SCRIPT TYPE="text/javascript" SRC="gamestart.js"></SCRIPT>
+</head>
+<script>
+window.onload = function(){
+	init();
+}
+
+</script>
+<body style="background-color: #000;>
+
+	<audio id="top_audio" preload="auto" autoplay>
+		<source src="konekonoosanpo.mp3" type="audio/mp3">
+	</audio>
+	
+	
+	<div id="main">
+		<CANVAS ID="canva" STYLE="background-image: url(top.png) ;background-size:cover; width:80%;margin-left: 10%;" width="800" height="400" ></CANVAS>
+		<video id="vide" src="end.mp4"></video>
+		<video id="videe" src="test_movie.mp4"></video>
+		<div id="consol"></div>
+		<div id="map"><img id="lamp" src="lamp.png"></div>
+	</div>
+	<div style="display: none;">
+		<img src="stage2.png">
+		<img src="stage2_alter.png">
+	</div>
+	
+
+	
+	<script type="text/javascript">
+		<!-- bgm = document.getElementById("top_audio").play().loop(); -->
+		bgm = document.getElementById("top_audio");
+		bgm.loop = true;
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,82 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#main {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	font-size: 0;
+}
+#videe{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    background: black;
+	opacity: 0;
+}
+#videe.aaa{
+    z-index: 11;
+	opacity: 1;
+}
+#vide{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    background: black;
+	opacity: 0;
+}
+#vide.on{
+    z-index: 11;
+	opacity: 1;
+}
+#map{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 15%;
+	background: rgba(0, 0, 0, 0.2);
+}
+#lamp{
+	z-index: 2;
+	width: 1%;
+	height: auto;
+	position: absolute;
+    animation: lamp 1s ease-out infinite;
+	transform: translate(-50%, -50%) scale(0.7);
+	opacity: 0.7;
+}
+@keyframes lamp {
+  100% {
+	transform: translate(-50%, -50%) scale(1.2);
+     opacity: 0.2;
+  }
+}
+
+#consol {
+    min-width: 200px;
+    min-height: 100px;
+    position: absolute;
+    z-index: 25;
+    left: 20px;
+    top: 20px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: rgba(245, 222, 179, 0.5);
+	transition: 0.5s;
+    z-index: 2;
+    opacity: 0;
+	font-size: 12px;
+	padding: 15px;
+}
+#consol.on{
+	opacity: 1;
+}
