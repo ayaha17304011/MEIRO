@@ -154,10 +154,12 @@ function start(){
 				left = true;
 				p = window.setInterval("changImages(i++);", 100);
 				c=s.Lef;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == aa||e.keyCode == 37){
 						left = false;
 						clearInterval(p);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -168,10 +170,12 @@ function start(){
 				right = true;
 				q = window.setInterval("changImages(i++);", 100);
 				c=s.Righ;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == dd||e.keyCode == 39){
 						right = false;
 						clearInterval(q);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -182,10 +186,12 @@ function start(){
 				up = true;
 				r = window.setInterval("changImages(i++);", 130);
 				c=s.Bac;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == ww||e.keyCode == 38){
 						up = false;
 						clearInterval(r);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -196,10 +202,12 @@ function start(){
 				down = true;
 				t = window.setInterval("changImages(i++);", 130);
 				c=s.Fron;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == ss||e.keyCode == 40){
 						down = false;
 						clearInterval(t);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -233,6 +241,30 @@ function start(){
 		}
 		me();
 	}, frame);
+}
+function bgmstart(){
+	Orderprocessing1();
+}
+function Orderprocessing1(){
+var vid = document.getElementById("myVideo");//获取音频对象
+var start = 0;//定义循环的变量
+var times=100;//定于循环的次数
+vid.addEventListener("ended",function() {vid.play();//启动音频，也就是播放
+start++;//循环
+start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+});vid.play();
+}
+function bgmstop(){
+	Orderprocessing2();
+}
+function Orderprocessing2(){
+var vid = document.getElementById("myVideo");//获取音频对象
+var start = 0;//定义循环的变量
+var times=100;//定于循环的次数
+vid.addEventListener("ended",function() {vid.play();//启动音频，也就是播放
+start++;//循环
+start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+});vid.pause();
 }
 
 map1 = new Image();
