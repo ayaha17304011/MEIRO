@@ -4,44 +4,14 @@ ctx = null;
 <!--框架-->
 frame = 1000/60;
 
-logointerval = null;
-keypressevent = null;
-
-
-var img1=new Image();
-img1.src="test1.png";
-
 var beginx=0;//裁減圖片的X軸坐標。從左往右遞增的。
 var beginy=0;//裁減圖片的X軸坐標。從左往右遞增的。
-
-
-
-
 
 <!--規模-->
 scale = 3;
 
 <!--生成fuction-->
 function init(){
-<!--第一張地圖生成-->
-	map_notitle = new Image();
-	map_notitle.src = 'notitle.png';
-	
-<!--第二張地圖生成-->
-	map_notitle_a = new Image();
-	map_notitle_a.src = 'notitle_alter.png';
-	
-<!--新地圖測試生成-->
-	map_forest = new Image();
-	map_forest.src = 'forest.png';
-	
-	map_forest_a = new Image();
-	map_forest_a.src = 'forest.png';
-
-	lamp = document.getElementById('lamp');
-	minimap = document.getElementById('map');
-	
-	
 	stage = 1;
 	console.log("init");
 <!--取得html中ID為canva的畫布,並設畫布為2D-->
@@ -70,46 +40,17 @@ function init(){
 	}, false);
 }
 <!--設定一開始進去的頁面-->
+<!--設定一開始進去的頁面-->
 function showlogo(){
-	
-	var x = 0;
-	var y = 0;
-
-	var radius = 0;
-	var direct = 1;
-	var direct_thr = 1.01;
-	var logospd = -1;
-	var logospd_thr = 1.01;
-	
-	var angle = 0;
-		
-	cx = (canv.width/2);
-	cy = (canv.height/2);
-	
-		var entera = 0;
-		var enterb = 0;
-		var enterc = 1;
-		
-		var strtext = document.getElementById("tname");
+	var strtext = document.getElementById("tname");
 		
 	logointerval = setInterval( function() {
-		
-		
 		ctx.clearRect(0, 0, canv.width, canv.height);
-		
 		
 		<!--設定進入頁面畫布顏色-->
 		ctx.fillStyle = "rgb(0, 0, 0)";
-	
-		
-	
-		
 	}, 1000/60);
-	
 }
-
-
-
 	var xoff = -850;
 	var yoff = -4200;
 	var charaspd = 4;
@@ -128,21 +69,20 @@ function showlogo(){
 	<!--a回傳値是65,s回傳値是83,d回傳値是68,w回傳値是87-->
 	<!--左回傳値是37,下s回傳値是38,右回傳値是39,上回傳値是40-->
 	var aa=65; var ss=83; var dd=68; var ww=87;
-	
-	
-	
-	var i = 0;
+
+var i = 0;
 function changImages(){
             //讓i在 0到3之間變化
             i = i % 3;
             //名字變成字符串
 }
 
-var p=null;
-var q=null;
-var r=null;
-var t=null;
-var z=null;
+<!--各方向のサイクル変数を設定-->
+var upCycle=null;
+var downCycle=null;
+var leftCycle=null;
+var rightCycle=null;
+var speedCycle=null;
 
 function start(){
 <!--監聽鍵盤按鍵事件，並回傳所按的按鍵為何-->
@@ -150,93 +90,70 @@ function start(){
 	window.addEventListener("keydown", function(e){
 		<!--取得按鈕的回傳値-->
 		var ky = e.keyCode;
-		
 		if(ky==aa||ky==37){
 			if(left == false){
 				left = true;
-				p = window.setInterval("changImages(i++);", 100);
+				leftCycle = window.setInterval("changImages(i++);", 100);
 				c=s.Lef;
 				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == aa||e.keyCode == 37){
 						left = false;
-						clearInterval(p);
+						clearInterval(leftCycle);
 						bgmstop();
 					}
 				}, false);
 			}
 		}
-		
 		if(ky==dd||ky==39){
 			if(right == false){
 				right = true;
-				q = window.setInterval("changImages(i++);", 100);
+				rightCycle = window.setInterval("changImages(i++);", 100);
 				c=s.Righ;
 				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == dd||e.keyCode == 39){
 						right = false;
-						clearInterval(q);
+						clearInterval(rightCycle);
 						bgmstop();
 					}
 				}, false);
 			}
 		}
-		
 		if(ky==ww||ky==38){
 			if(up == false){
 				up = true;
-				r = window.setInterval("changImages(i++);", 130);
+				upCycle = window.setInterval("changImages(i++);", 130);
 				c=s.Bac;
 				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == ww||e.keyCode == 38){
 						up = false;
-						clearInterval(r);
+						clearInterval(upCycle);
 						bgmstop();
 					}
 				}, false);
 			}
 		}
-		
 		if(ky==ss||ky==40){
 			if(down == false){
 				down = true;
-				t = window.setInterval("changImages(i++);", 130);
+				downCycle = window.setInterval("changImages(i++);", 130);
 				c=s.Fron;
 				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == ss||e.keyCode == 40){
 						down = false;
-						clearInterval(t);
+						clearInterval(downCycle);
 						bgmstop();
 					}
 				}, false);
 			}
 		}
-		<!--如果按下Shift(13)加速-->
-		if(ky==16){
-			if(speed == false){
-				speed = true;
-				p = window.setInterval("changImages(i++);", 100);
-			clearInterval(p)
-				window.addEventListener("keyup", function(e){
-					if(e.keyCode == 16){
-						speed = false;
-					}
-				}, false);
-			}
-		}
-		<!--如果按下Enter(13)或Space(32)改變地圖-->
-		if(ky==13||ky==32){
-			changeMap();
-		}
 	}, false);
 	<!--間隔-->
 	setInterval( function(){
-		
 		drawMap();
-		
 		moving();
 		if(speed==true){
 			moving();
@@ -244,58 +161,42 @@ function start(){
 		me();
 	}, frame);
 }
+
+<!--WALK AUTO-->
 function bgmstart(){
 	Orderprocessing1();
 }
 function Orderprocessing1(){
-var vid = document.getElementById("myVideo");//获取音频对象
-var start = 0;//定义循环的变量
-var times=100;//定于循环的次数
-vid.addEventListener("ended",function() {vid.play();//启动音频，也就是播放
-start++;//循环
-start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
-});vid.play();
+	var vid = document.getElementById("myVideo");//获取音频对象
+	var start = 0;//定义循环的变量
+	var times=100;//定于循环的次数
+	vid.addEventListener("ended",function() {
+		vid.play();//启动音频，也就是播放
+		start++;//循环
+		start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+	});
+	vid.play();
 }
 function bgmstop(){
 	Orderprocessing2();
 }
 function Orderprocessing2(){
-var vid = document.getElementById("myVideo");//获取音频对象
-var start = 0;//定义循环的变量
-var times=100;//定于循环的次数
-vid.addEventListener("ended",function() {vid.play();//启动音频，也就是播放
-start++;//循环
-start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
-});vid.pause();
+	var vid = document.getElementById("myVideo");//获取音频对象
+	var start = 0;//定义循环的变量
+	var times=100;//定于循环的次数
+	vid.addEventListener("ended",function() {
+		vid.play();//启动音频，也就是播放
+		start++;//循环
+		start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+	});vid.pause();
 }
 
-map1 = new Image();
-map2 = new Image();
+
+map = new Image();
 
 <!--設定地圖-->
 function setMap(str){
-	<!--載入網頁時起動function-->
-	map1.addEventListener("load", function(){
-		minimapsize = 15;
-		minimap.style.width = minimapsize+'%';
-		minimap.style.height = ((map.height / map.width) * minimapsize)+'%';
-	});
-	
-	map1.src = str+'.png';
-	map2.src = str+'_alter.png';
-	
-	map = map2;
-	
-}
-
-<!--按下空白或enter鍵則改變地圖,如果地圖=地圖1則改成地圖2-->
-function changeMap(){
-
-	if(map == map1){
-		map = map2;
-	}else{
-		map = map1;
-	}
+	map.src = str+'.png';
 }
 
 <!--畫地圖-->
@@ -309,55 +210,38 @@ function drawMap(){
 }
 <!--ステージで集める色の設定-->
 function setChara(){
+	chara_width_quarter = chara.width/4;
+	chara_width_half = chara.width/2;
+	canv_width_half = canv.width/2;
+	
+	chara_height_quarter = chara.height/4;
+	chara_height_half = chara.height/2;
+	canv_height_half = canv.height/2;
+
 	me1 = canv.width/2 - chara.width/4;
 	me2 = canv.height/2 - chara.height/2;
 	me3 = chara.width/2;
 	me4 = chara.height/2;
+	me5 = canv_height_half-chara_height_half;
 	
 	sh1 = me2 + 70;
 	sh2 = 20;
-}
-	
+}	
 	xplus=10;
 	yplus=10;
+
 	
 var standard = false;
-var purple = false;
-var blue = false;
-var orange = false;
 var lightblue = false;
 var yellow = false;
 var red = false;
-	
-function standard1(){
-	standard = false
-	if(purple == true){
-		standard = true;
-	}
-}
-function standard2(){
-	standard = false
-	if(blue == true && orange == true){
-		standard = true;
-	}
-}
+
 function standard3(){
 	standard = false
 	if(lightblue == true && yellow == true && red == true){
 		standard = true;
 	}
 }
-
-	
-	
-	pon = 0;
-	pona = 0;
-	ponb = 0;
-	ponc = 0;
-	pond = 1;
-	pone = true;
-	
-	
 <!--当たり判定->
 function me(){
 
@@ -368,7 +252,6 @@ function me(){
 	lamp.style.top = (-(yoff - canv.height/2) * 100 / map1.height * 1/scale)+'%';
 	
 }
-<!--移動-->
 <!--移動-->
 <!--色にぶつかる->
 function moving(){
@@ -481,7 +364,10 @@ function allFalse(){
 	left = false;
 	right = false;
 	down = false;
-	clearInterval(t);
+	clearInterval(rightCycle);
+	clearInterval(upCycle);
+	clearInterval(downCycle);
+	clearInterval(leftCycle);
 }
 
 function gameOverStandard(){
@@ -493,7 +379,10 @@ function gameOverStandard(){
 	}else{
 		if(confirm("色が足りないみたい")==true){
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff+=10;
 		}else{
 		}
@@ -503,16 +392,21 @@ function gameOverStandard(){
 function getRed(){
 	if(red== true){
 		if(confirm("もうこの花は集めてるよ")==true){
-			
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff-=0;
 		}
 	}else{
 		if(confirm("赤色の花をてにいれた")==true){
 			red = true;
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff-=0;
 		}
 	}
@@ -524,18 +418,27 @@ function getLightBlue(){
 		if(confirm("もうこの花は集めてるよ")==true){
 			
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff-=0;
 		}
 	}else{
 		if(confirm("水色の花をてにいれた")==true){
 			lightblue = true;
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff-=0;
 		}
 	}
-	clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 }
 
 function getYellow(){
@@ -543,18 +446,27 @@ function getYellow(){
 		if(confirm("もうこの花は集めてるよ")==true){
 			
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff-=0;
 		}
 	}else{
 		if(confirm("黄色の花をてにいれた")==true){
 			yellow = true;
 			allFalse();
-			clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 			yoff-=0;
 		}
 	}
-	clearInterval(t);
+			clearInterval(rightCycle);
+			clearInterval(upCycle);
+			clearInterval(downCycle);
+			clearInterval(leftCycle);
 }
 function gameclear(){
 	<!--清除給定矩形内的像素(要清除矩形左上x座標,要清除矩形左上y座標,寬度,高度)-->
@@ -599,7 +511,7 @@ function sleep(d){
   for(var t = Date.now();Date.now() - t <= d;);
 }
 
-
+<!--キャラクタ分割-->
 var LEF=37,U=38,RIGH=39,DOW=40;//KeyCode
             var isKeyDown=false;
             var speed=2;
@@ -608,10 +520,10 @@ var sx=[0,250,500,750,1000,1250],sy=[0,250,500];//切片位置
 			var x=240,y=135;//顯示位置
             var dx=10,dy=10;//座標偏移
             var s={
-        Bac:[[3,1],[4,1],[5,1],[4,0]],
-        Righ:[[3,2],[4,2],[5,2],[5,0]],
-        Fron:[[0,1],[1,1],[2,1],[1,0]],
-        Lef:[[0,2],[1,2],[2,2],[2,0]],
+        Bac:[[3,1],[4,1],[5,1]],
+        Righ:[[3,2],[4,2],[5,2]],
+        Fron:[[0,1],[2,1],[1,1]],
+        Lef:[[0,2],[1,2],[2,2]],
         leftstop:[[1,2]]
             };//人物状態
             var i=1;
