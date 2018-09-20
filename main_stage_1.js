@@ -1,10 +1,9 @@
 canv = null;
 ctx = null;
+
 <!--框架-->
 <!--フレーム-->
 frame = 1000/60;
-
-keypressevent = null;
 
 var beginx=0;//裁減圖片的X軸坐標。從左往右遞增的。今の時点では使われていない
 var beginy=0;//裁減圖片的X軸坐標。從左往右遞增的。何かに使うかも
@@ -15,54 +14,61 @@ scale = 2;
 
 <!--生成fuction-->
 function init(){
-	
-<!--新地圖測試生成-->
-<!--ステージ1->
-map_stage1 = new Image();
-map_stage1.src = 'stage1.png';
-
-stage = 1;
-console.log("init");
-	
+	stage = 1;
+	console.log("init");
 <!--取得html中ID為canva的畫布,並設畫布為2D-->
-canv = document.getElementById("canva");
-ctx = canv.getContext("2d");
+	canv = document.getElementById("canva");
+	ctx = canv.getContext("2d");
+	<!--生成角色並放入角色圖片-->
+	<!--キャラクタを生成して、画像を入れ-->
+	chara = new Image();
+	chara.src = 'boy_1_stop.png';
+	<!--生成陰影並放入圖片-->
+	<!--当たり判定の影を生成-->
+	shadow = new Image();
+	shadow.src = 'shadow1.png';
 	
-<!--生成角色並放入角色圖片-->
-<!--キャラクタを生成して、画像を入れ-->
-chara = new Image();
-chara.src = 'boy_1_stop.png';
+	<!--設置初始地圖-->
+	<!--最初のマップを設定-->
+	setMap('stage1');
+	scale = 1.3;
 	
-<!--生成陰影並放入圖片-->
-<!--当たり判定の影を生成-->
-shadow = new Image();
-shadow.src = 'shadow1.png';
-	
-<!--設置初始地圖-->
-<!--最初のマップを設定-->
-setMap('stage1');
-scale = 1.3;
-	
-setChara();
-ctx.clearRect(0, 0, canv.width, canv.height);
-start();
+	showlogo();
+	<!--當按下任意鍵時起動後面function stoplogo-->
+	window.addEventListener("keypress", function stoplogo(e){
+		setChara();
+		clearInterval(logointerval);
+		<!--畫人物-->
+		ctx.clearRect(0, 0, canv.width, canv.height);
+		removeEventListener("keypress", stoplogo);
+		start();
+	}, false);
 }
-
-var xoff = -700;
-var yoff = -2000;
-var charaspd = 4;
-var col1;
-	
-<!--左-->
-var left = false;
-<!--右-->
-var right = false;
-<!--上-->
-var up = false;
-<!--下-->
-var down = false;
-<!--加速-->
-var speed = false;
+<!--設定一開始進去的頁面-->
+function showlogo(){
+	var strtext = document.getElementById("tname");
+		
+	logointerval = setInterval( function() {
+		ctx.clearRect(0, 0, canv.width, canv.height);
+		
+		<!--設定進入頁面畫布顏色-->
+		ctx.fillStyle = "rgb(0, 0, 0)";
+	}, 1000/60);
+}
+	var xoff = -700;
+	var yoff = -2000;
+	var charaspd = 4;
+	var col1;
+	<!--左-->
+	var left = false;
+	<!--右-->
+	var right = false;
+	<!--上-->
+	var up = false;
+	<!--下-->
+	var down = false;
+	<!--加速-->
+	var speed = false;
 	
 <!--設置上下左右的値,每個按鈕都有一個對應的回傳値-->
 <!--a回傳値是65,s回傳値是83,d回傳値是68,w回傳値是87-->
@@ -70,15 +76,16 @@ var speed = false;
 <!--左回傳値是37,下回傳値是38,右回傳値是39,上回傳値是40-->
 <!--左のキーコードは37,下のキーコードは38,右のキーコードは39,上のキーコードは40-->
 var aa=65; var ss=83; var dd=68; var ww=87;
-
+	
+	
 //iを0から3の間変化		
 var i = 0;
 function changImages(){
 	//讓i在 0到3之間變化
 	i = i % 3;
+	//名字變成字符串
 }
 
-<!--各方向のサイクル変数を設定-->
 <!--各方向のサイクル変数を設定-->
 var upCycle=null;
 var downCycle=null;
@@ -88,7 +95,6 @@ var speedCycle=null;
 
 function start(){
 	<!--監聽鍵盤按鍵事件，並回傳所按的按鍵為何-->
-
 	<!--設置按鍵功能keydown = 按下按鈕, keyup = 放開按鈕-->
 	<!--キーの機能を設定keydown = キーを押す, keyup = キーを放す-->
 	window.addEventListener("keydown", function(e){
@@ -99,10 +105,12 @@ function start(){
 				left = true;
 				leftCycle = window.setInterval("changImages(i++);", 100);
 				c=s.Lef;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == aa||e.keyCode == 37){
 						left = false;
 						clearInterval(leftCycle);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -112,10 +120,12 @@ function start(){
 				right = true;
 				rightCycle = window.setInterval("changImages(i++);", 100);
 				c=s.Righ;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == dd||e.keyCode == 39){
 						right = false;
 						clearInterval(rightCycle);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -125,24 +135,27 @@ function start(){
 				up = true;
 				upCycle = window.setInterval("changImages(i++);", 130);
 				c=s.Bac;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == ww||e.keyCode == 38){
 						up = false;
 						clearInterval(upCycle);
+						bgmstop();
 					}
 				}, false);
 			}
-		}
-		
+		}		
 		if(ky==ss||ky==40){
 			if(down == false){
 				down = true;
 				downCycle = window.setInterval("changImages(i++);", 130);
 				c=s.Fron;
+				bgmstart();
 				window.addEventListener("keyup", function(e){
 					if(e.keyCode == ss||e.keyCode == 40){
 						down = false;
 						clearInterval(downCycle);
+						bgmstop();
 					}
 				}, false);
 			}
@@ -158,20 +171,48 @@ function start(){
 	}, frame);
 }
 
-map1 = new Image();
+<!--WALK AUTO-->
+function bgmstart(){
+	Orderprocessing1();
+}
+function Orderprocessing1(){
+	var vid = document.getElementById("myVideo");//获取音频对象
+	var start = 0;//定义循环的变量
+	var times=100;//定于循环的次数
+	vid.addEventListener("ended",function() {
+		vid.play();//启动音频，也就是播放
+		start++;//循环
+		start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+	});
+	vid.play();
+}
+function bgmstop(){
+	Orderprocessing2();
+}
+function Orderprocessing2(){
+	var vid = document.getElementById("myVideo");//获取音频对象
+	var start = 0;//定义循环的变量
+	var times=100;//定于循环的次数
+	vid.addEventListener("ended",function() {
+		vid.play();//启动音频，也就是播放
+		start++;//循环
+		start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+	});vid.pause();
+}
+
+
+map = new Image();
 
 <!--設定地圖-->
 function setMap(str){
-	<!--載入網頁時起動function-->
-	map1.src = str+'_alter.png';
-	map = map1;
+	map.src =  str+'_alter.png';
 }
 
 <!--マップ-->
 function drawMap(){
 	<!--map=規定要使用的圖像畫布視頻-->
-	<!--xoff=在畫布上放置圖像的x座標位置 = 50-->
-	<!--yoff=在畫布上放置圖像的y座標位置 = -2400-->
+	<!--xoff=在畫布上放置圖像的x座標位置 = -700-->
+	<!--yoff=在畫布上放置圖像的y座標位置 = -2000-->
 	<!--map.width*scale=要使用的圖像的寬度-->
 	<!--map.width*scale=要使用的圖像的高度-->
 	ctx.drawImage(map, xoff, yoff, map.width*scale, map.height*scale);
@@ -194,8 +235,7 @@ function setChara(){
 	
 	sh1 = me2 + 70;
 	sh2 = 20;
-}
-	
+}	
 	xplus=10;
 	yplus=10;
 	
@@ -207,12 +247,14 @@ function standard1(){
 	if(purple == true){
 		standard = true;
 	}
-}
+}	
 <!--当たり判定->
 function me(){
+
 	<!--設置圖片drawImage(圖片,起始x座標,起始y座標,使用圖像的寬度, 使用圖像的寬度);-->
 	ctx.drawImage(shadow, me1+38, sh1+55, me3, sh2);
 	ctx.drawImage(img,sx[c[i][0]],sy[c[i][1]],sWidth,sHeight, me1,sh1-100,sWidth/1.5,sHeight/1.5);
+	
 }
 <!--移動-->
 <!--色にぶつかる->
@@ -322,31 +364,66 @@ function gameOverStandard(){
 	if(standard == true){
 		gameclear();
 	}else{
-		if(confirm("色が足りないみたい")==true){
+		//色がたりないみたい
+		
+		
+		swal({
+			buttons:{
+				cancel:false,
+				confirm:true,
+			},
+			
+			timer: 2500
+		});
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff+=10;
-		}else{
-		}
+		
 	}
 }
 
 function getPurple(){
 	if(purple == true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		
+		// もうあつめてる
+		
+		swal({
+			buttons:{
+				cancel:false,
+				confirm:true,
+			},
 			
+			timer: 2500
+		});
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff-=50;
-		}
+		
 	}else{
-		if(confirm("むらさきの花をてにいれた")==true){
+		
+		
+		// むらさきの花を手に入れた
+		
+		swal({
+			buttons:{
+				cancel:false,
+				confirm:true,
+			},
+			
+			timer: 2500
+		});
+		
+		
 			purple = true;
 			allFalse();
 			clearInterval(rightCycle);
@@ -354,7 +431,7 @@ function getPurple(){
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff-=50;
-		}
+		
 	}
 	clearInterval(rightCycle);
 	clearInterval(upCycle);
@@ -389,10 +466,10 @@ var sx=[0,250,500,750,1000,1250],sy=[0,250,500];//切片位置
 			var x=240,y=135;//顯示位置
             var dx=10,dy=10;//座標偏移
             var s={
-        Bac:[[3,1],[4,1],[5,1],[4,0]],
-        Righ:[[3,2],[4,2],[5,2],[5,0]],
-        Fron:[[0,1],[1,1],[2,1],[1,0]],
-        Lef:[[0,2],[1,2],[2,2],[2,0]],
+        Bac:[[3,1],[4,1],[5,1]],
+        Righ:[[3,2],[4,2],[5,2]],
+        Fron:[[0,1],[2,1],[1,1]],
+        Lef:[[0,2],[1,2],[2,2]],
         leftstop:[[1,2]]
             };//人物状態
             var i=1;
