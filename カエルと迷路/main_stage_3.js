@@ -470,7 +470,7 @@ function getYellow(){
 }
 function gameclear(){
 	<!--清除給定矩形内的像素(要清除矩形左上x座標,要清除矩形左上y座標,寬度,高度)-->
-	gameover();
+	document.location.href="end.html";
 }
 
 function entrance(xx, yy){
