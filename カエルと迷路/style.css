@@ -80,3 +80,15 @@
 #consol.on{
 	opacity: 1;
 }
+
+
+#inputstyle{
+
+	color: #f2f1f8;
+	background-color: #f2a4cd99;
+	outline: none;
+	border-style: none;
+	padding-top: 0px;
+	margin-left: 5px;
+
+}

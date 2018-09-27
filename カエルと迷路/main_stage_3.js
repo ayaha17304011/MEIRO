@@ -377,63 +377,116 @@ function gameOverStandard(){
 	if(standard == true){
 		gameclear();
 	}else{
-		if(confirm("色が足りないみたい")==true){
+		//色がたりないみたい
+		
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 3000
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(stop_goal.png)');
+		
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff+=10;
-		}else{
-		}
 	}
 }
 
 function getRed(){
 	if(red== true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		// もうあつめてる
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(after_flower.png)');
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}else{
-		if(confirm("赤色の花をてにいれた")==true){
+		//赤色の花を手に入れた
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(get_red.png)');
+		
+		
 			red = true;
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}
 	clearInterval(t);
 }
 
 function getLightBlue(){
 	if(lightblue == true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		// もうあつめてる
+		
+		swal({
 			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(after_flower.png)');
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}else{
-		if(confirm("水色の花をてにいれた")==true){
+		//水色の花をてにいれた
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(get_Lblue.png)');
+		
+		
 			lightblue = true;
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
@@ -443,25 +496,45 @@ function getLightBlue(){
 
 function getYellow(){
 	if(yellow == true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		// もうあつめてる
+		
+		swal({
 			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(after_flower.png)');
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}else{
-		if(confirm("黄色の花をてにいれた")==true){
+		//黄色の花をてにいれた
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(get_yellow.png)');
+		
+		
 			yellow = true;
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
@@ -470,7 +543,7 @@ function getYellow(){
 }
 function gameclear(){
 	<!--清除給定矩形内的像素(要清除矩形左上x座標,要清除矩形左上y座標,寬度,高度)-->
-	document.location.href="end.html";
+	gameover();
 }
 
 function entrance(xx, yy){
@@ -478,13 +551,10 @@ function entrance(xx, yy){
 	yoff = yy;
 }
 <!--第二關結束-->
-<!--
 function gameover(){
 	ending();
 }
--->
 <!--結束video-->
-<!--
 function ending(){
 	var vide = document.getElementById("vide");
 	vide.className += ' on';
@@ -506,7 +576,7 @@ videe.addEventListener('pause',function(){
 		}
 	} 	
 }
--->
+
 
 
 <!--訊息提示-->

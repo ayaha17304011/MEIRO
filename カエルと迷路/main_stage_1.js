@@ -364,30 +364,61 @@ function gameOverStandard(){
 	if(standard == true){
 		gameclear();
 	}else{
-		if(confirm("色が足りないみたい")==true){
+		//色がたりないみたい
+		
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 3000
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(stop_goal.png)');
+
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff+=10;
-		}else{
-		}
 	}
 }
 
 function getPurple(){
 	if(purple == true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		// もうあつめてる
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(after_flower.png)');
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff-=50;
-		}
 	}else{
-		if(confirm("むらさきの花をてにいれた")==true){
+		// むらさきの花を手に入れた
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(get_purple.png)');
+		
+		
 			purple = true;
 			allFalse();
 			clearInterval(rightCycle);
@@ -395,7 +426,6 @@ function getPurple(){
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff-=50;
-		}
 	}
 	clearInterval(rightCycle);
 	clearInterval(upCycle);

@@ -5,6 +5,9 @@
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 	<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
 	<SCRIPT TYPE="text/javascript" SRC="main_stage_1.js"></SCRIPT>
+	<LINK REL="stylesheet" TYPE="text/css" HREF="sweet.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <script>
 window.onload = function(){
@@ -34,7 +37,8 @@ window.onload = function(){
 	</div>
 	
 	<form>
-	<input type="button" value="やめる" onclick="first()">
+		<input id="inputstyle" type="button" value="いちばん最初からやり直す" onclick="first()">
+
 	</form>
 	
 	<script>

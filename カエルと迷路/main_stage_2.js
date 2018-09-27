@@ -372,39 +372,68 @@ function gameOverStandard(){
 	if(standard == true){
 		gameclear();
 	}else{
-		if(confirm("色が足りないみたい")==true){
+		//色がたりないみたい
+		
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 3000
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(stop_goal.png)');
+		
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff+=10;
-		}else{
-		}
 	}
 }
 
 function getOrange(){
 	if(orange == true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		// もうあつめてる
+		
+		swal({
 			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(after_flower.png)');
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}else{
-		if(confirm("オレンジ色の花をてにいれた")==true){
+		//オレンジ色の花をてにいれた
+		
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+		});
+		
+		$(".swal-modal").css('background-image', 'url(get_orange.png)');
+		
+		
 			orange = true;
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
@@ -414,25 +443,44 @@ function getOrange(){
 
 function getBlue(){
 	if(blue == true){
-		if(confirm("もうこの花は集めてるよ")==true){
+		// もうあつめてる
+		
+		swal({
 			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(after_flower.png)');
+		
+		
+		
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}else{
-		if(confirm("青色の花をてにいれた")==true){
+		//青色の花を手に入れた
+		swal({
+			
+			background: '#000 url(//after_flower.png)',
+			timer : 2500
+			
+		});
+		
+		$(".swal-modal").css('background-image', 'url(get_blue.png)');
+		
+		
 			blue = true;
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
-			yoff-=0;
-		}
+			yoff-=50;
 	}
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
