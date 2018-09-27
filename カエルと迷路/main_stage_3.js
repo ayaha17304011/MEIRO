@@ -12,7 +12,7 @@ scale = 3;
 
 <!--生成fuction-->
 function init(){
-	stage = 1;
+	stage = 2;
 	console.log("init");
 <!--取得html中ID為canva的畫布,並設畫布為2D-->
 	canv = document.getElementById("canva");
@@ -478,10 +478,13 @@ function entrance(xx, yy){
 	yoff = yy;
 }
 <!--第二關結束-->
+<!--
 function gameover(){
 	ending();
 }
+-->
 <!--結束video-->
+<!--
 function ending(){
 	var vide = document.getElementById("vide");
 	vide.className += ' on';
@@ -503,7 +506,7 @@ videe.addEventListener('pause',function(){
 		}
 	} 	
 }
-
+-->
 
 
 <!--訊息提示-->

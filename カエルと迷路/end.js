@@ -9,16 +9,31 @@ logointerval = null;
 keypressevent = null;
 
 function init(){
-	
+		showlogo();
+		clearInterval(logointerval);
 		logoover();
 
+}
+
+function showlogo(){
+	logointerval = setInterval( function() {
+		
+		
+	
+		
+		<!--設定進入頁面畫布顏色-->
+		<!--トップ画面の設定-->
+		
+	
+	}, 1000/60);
+	
 }
 
 function logoover(){
 	starting();
 }
 
-<!--スタートムービーvideo-->
+<!--エンドムービーvideo-->
 function starting(){
 	var vide = document.getElementById("vide");
 	vide.className += ' on';

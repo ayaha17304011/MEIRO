@@ -17,14 +17,25 @@ window.onload = function(){
 	
 	
 	<div id="main">
-		<CANVAS ID="canva"  STYLE="background-image: url(top.png) ;background-size:cover; width:80%;margin-left: 10%;"  width="800" height="400" ></CANVAS>
+		<CANVAS ID="canva" STYLE="background-image: url(top.png) ;background-size:cover; width:80%;margin-left: 10%;" width="800" height="400" ></CANVAS>
 		<video id="vide" src="end.mp4"></video>
+		<div id="consol"></div>
+		<div id="map"><img id="lamp" src="lamp.png"></div>
+	</div>
+	<div style="display: none;">
+		<img src="stage2.png">
+		<img src="stage2_alter.png">
+	</div>
 	
 		
 	</div>
 	
 	
-
+	<script type="text/javascript">
+		<!-- bgm = document.getElementById("top_audio").play().loop(); -->
+		bgm = document.getElementById("top_audio");
+		bgm.loop = true;
+	</script>
 
 
 	
