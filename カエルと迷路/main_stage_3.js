@@ -543,8 +543,43 @@ function getYellow(){
 }
 function gameclear(){
 	<!--清除給定矩形内的像素(要清除矩形左上x座標,要清除矩形左上y座標,寬度,高度)-->
-	gameover();
+	document.location.href="end.html";
 }
+
+function entrance(xx, yy){
+	xoff = xx;
+	yoff = yy;
+}
+<!--第二關結束-->
+<!--
+function gameover(){
+	ending();
+}
+-->
+<!--結束video-->
+<!--
+function ending(){
+	var vide = document.getElementById("vide");
+	vide.className += ' on';
+	vide.play();
+	vide.addEventListener('ended',function(){
+		vide.className = '';
+		videe.ended = window.location.href="gamestart.html" ; 
+	});
+videe.addEventListener('pause',function(){
+		videe.className = '';
+		videe.pause = window.location.href="gamestart.html" ; 
+	});	
+	document.onkeydown=function(e){  //对整个页面文档监听 
+	var keyNum=window.event ? e.keyCode :e.which;  //获取被按下的键值 
+
+	if(keyNum==13){ 
+	videe.pause();
+		
+		}
+	} 	
+}
+-->
 
 function entrance(xx, yy){
 	xoff = xx;
