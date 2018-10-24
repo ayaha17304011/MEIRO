@@ -2,34 +2,36 @@ canv = null;
 ctx = null;
 
 <!--框架-->
+<!--フレーム-->
 frame = 1000/60;
 
-var img1=new Image();
-img1.src="test1.png";
-
-var beginx=0;//裁減圖片的X軸坐標。從左往右遞增的。
-var beginy=0;//裁減圖片的X軸坐標。從左往右遞增的。
+var beginx=0;//裁減圖片的X軸坐標。從左往右遞增的。今の時点では使われていない
+var beginy=0;//裁減圖片的X軸坐標。從左往右遞增的。何かに使うかも
 
 <!--規模-->
+<!--迷路の画像を何倍拡大させるか-->
 scale = 2;
 
 <!--生成fuction-->
 function init(){
-	stage = 2;
+	stage = 1;
 	console.log("init");
 <!--取得html中ID為canva的畫布,並設畫布為2D-->
 	canv = document.getElementById("canva");
 	ctx = canv.getContext("2d");
 	<!--生成角色並放入角色圖片-->
+	<!--キャラクタを生成して、画像を入れ-->
 	chara = new Image();
 	chara.src = 'boy_1_stop.png';
 	<!--生成陰影並放入圖片-->
+	<!--当たり判定の影を生成-->
 	shadow = new Image();
 	shadow.src = 'shadow1.png';
 	
 	<!--設置初始地圖-->
-	setMap('town');
-	scale = 2;
+	<!--最初のマップを設定-->
+	setMap('stage1');
+	scale = 1.3;
 	
 	showlogo();
 	<!--當按下任意鍵時起動後面function stoplogo-->
@@ -53,9 +55,8 @@ function showlogo(){
 		ctx.fillStyle = "rgb(0, 0, 0)";
 	}, 1000/60);
 }
-
-	var xoff = -1000;
-	var yoff = -2200;
+	var xoff = -700;
+	var yoff = -2000;
 	var charaspd = 4;
 	var col1;
 	<!--左-->
@@ -68,16 +69,21 @@ function showlogo(){
 	var down = false;
 	<!--加速-->
 	var speed = false;
-	<!--設置上下左右的値,每個按鈕都有一個對應的回傳値-->
-	<!--a回傳値是65,s回傳値是83,d回傳値是68,w回傳値是87-->
-	<!--左回傳値是37,下s回傳値是38,右回傳値是39,上回傳値是40-->
-	var aa=65; var ss=83; var dd=68; var ww=87;
 	
+<!--設置上下左右的値,每個按鈕都有一個對應的回傳値-->
+<!--a回傳値是65,s回傳値是83,d回傳値是68,w回傳値是87-->
+<!--aのキーコードは65,sのキーコードは83,dのキーコードは68,wのキーコードは87-->
+<!--左回傳値是37,下回傳値是38,右回傳値是39,上回傳値是40-->
+<!--左のキーコードは37,下のキーコードは38,右のキーコードは39,上のキーコードは40-->
+var aa=65; var ss=83; var dd=68; var ww=87;
+	
+	
+//iを0から3の間変化		
 var i = 0;
 function changImages(){
-            //讓i在 0到3之間變化
-            i = i % 3;
-            //名字變成字符串
+	//讓i在 0到3之間變化
+	i = i % 3;
+	//名字變成字符串
 }
 
 <!--各方向のサイクル変数を設定-->
@@ -89,7 +95,6 @@ var speedCycle=null;
 
 function start(){
 	<!--監聽鍵盤按鍵事件，並回傳所按的按鍵為何-->
-
 	<!--設置按鍵功能keydown = 按下按鈕, keyup = 放開按鈕-->
 	<!--キーの機能を設定keydown = キーを押す, keyup = キーを放す-->
 	window.addEventListener("keydown", function(e){
@@ -139,8 +144,7 @@ function start(){
 					}
 				}, false);
 			}
-		}
-		
+		}		
 		if(ky==ss||ky==40){
 			if(down == false){
 				down = true;
@@ -196,18 +200,19 @@ function Orderprocessing2(){
 	});vid.pause();
 }
 
+
 map = new Image();
 
 <!--設定地圖-->
-function setMap(str){	
-	map.src = str+'_alter.png';
+function setMap(str){
+	map.src =  str+'_alter.png';
 }
 
-<!--畫地圖-->
+<!--マップ-->
 function drawMap(){
 	<!--map=規定要使用的圖像畫布視頻-->
-	<!--xoff=在畫布上放置圖像的x座標位置 = 50-->
-	<!--yoff=在畫布上放置圖像的y座標位置 = -2400-->
+	<!--xoff=在畫布上放置圖像的x座標位置 = -700-->
+	<!--yoff=在畫布上放置圖像的y座標位置 = -2000-->
 	<!--map.width*scale=要使用的圖像的寬度-->
 	<!--map.width*scale=要使用的圖像的高度-->
 	ctx.drawImage(map, xoff, yoff, map.width*scale, map.height*scale);
@@ -233,32 +238,27 @@ function setChara(){
 }	
 	xplus=10;
 	yplus=10;
-
 	
 var standard = false;
-var blue = false;
-var orange = false;
-
-function standard2(){
+var purple = false;
+	
+function standard1(){
 	standard = false
-	if(blue == true && orange == true){
+	if(purple == true){
 		standard = true;
 	}
-}
+}	
 <!--当たり判定->
 function me(){
 
 	<!--設置圖片drawImage(圖片,起始x座標,起始y座標,使用圖像的寬度, 使用圖像的寬度);-->
 	ctx.drawImage(shadow, me1+38, sh1+55, me3, sh2);
 	ctx.drawImage(img,sx[c[i][0]],sy[c[i][1]],sWidth,sHeight, me1,sh1-100,sWidth/1.5,sHeight/1.5);
-	lamp.style.left = (-(xoff  - canv.width/2) * 100 / map1.width * 1/scale)+'%';
-	lamp.style.top = (-(yoff - canv.height/2) * 100 / map1.height * 1/scale)+'%';
 	
 }
 <!--移動-->
 <!--色にぶつかる->
 function moving(){
-	
 		<!--getImageData() 方法返回 ImageData該對象copy了畫布指定矩形的像素數據。-->
 		<!--getImageData(複製點的x座標,複製點的y座標,要複製的矩形的寬度,要複製的矩形的高度)-->
 		<!--getImageData(x,y,width,height).data為陣列-->
@@ -268,17 +268,15 @@ function moving(){
 		<!--alpha = getImageData(x,y,width,height).data[3]		alpha 通道 (0-255; 0 是透明的，255 是完全可见的)-->
 
 	if(left == true){	
-		col1 = ctx.getImageData(me1+40 , sh1+35, 5, 25).data;
+		col1 = ctx.getImageData(me1+40 , sh1+35, 1, 25).data;
 		<!--設定可以行走的顏色,第一個R第二個G第三個B第四個透度-->
-		if(col1[0] == 250 && col1[sh2*1-4] == 250 && col1[sh2*2-4] == 250 && col1[sh2*3-4] == 250 && col1[sh2*4-4] ==250){
+		if(col1[0] >=250 && col1[sh2*1-4] >=250 && col1[sh2*2-4] >=250 && col1[sh2*3-4] >=250 && col1[sh2*4-4] >=250){
 			xoff+=charaspd;
 		<!--到達設定的顏色就過關-->
 		}else if( (col1[0] < 179 && col1[2] >= 231) || (col1[sh2*4-4] < 179 && col1[sh2*4-2] >= 231) ){
 			gameOverStandard();
-		}else if(col1[0] == 252 && col1[1] == 164 && col1[2] == 79){
-			getOrange();
-		}else if(col1[0] == 38 && col1[1] == 104 && col1[2] == 167){
-			getBlue();
+		}else if(col1[0] == 211 && col1[1] == 143 && col1[2] == 254){
+			getPurple();
 		}else if(col1[0] < 250){
 			xoff-=charaspd;
 			yoff-=charaspd;
@@ -291,16 +289,14 @@ function moving(){
 		}
 	}
 	if(right == true){
-		col1 = ctx.getImageData(me1 + me3 +5, sh1+10, 1, sh2+1).data;
+		col1 = ctx.getImageData(me1 + me3 -1, me5+120, 1, sh2).data;
 		
-		if(col1[0] ==250 && col1[sh2*1-4] ==250 && col1[sh2*2-4] ==250 && col1[sh2*3-4] ==250 && col1[sh2*4-4] ==250){
+		if(col1[0] >=250 && col1[sh2*1-4] >=250 && col1[sh2*2-4] >=250 && col1[sh2*3-4] >=250 && col1[sh2*4-4] >=250){
 			xoff-=charaspd;
 		}else if( (col1[0] < 179 && col1[2] >= 231) || (col1[sh2*4-4] < 179 && col1[sh2*4-2] >= 231) ){
 			gameOverStandard();
-		}else if(col1[0] == 252 && col1[1] == 164 && col1[2] == 79){
-			getOrange();
-		}else if(col1[0] == 38 && col1[1] == 104 && col1[2] == 167){
-			getBlue();
+		}else if(col1[0] == 211 && col1[1] == 143 && col1[2] == 254){
+			getPurple();
 		}else if(col1[0] < 250 && col1[sh2*4-4] >=250){
 			xoff+=charaspd;
 			yoff-=charaspd;
@@ -312,15 +308,13 @@ function moving(){
 		}
 	}
 	if(up == true){
-		col1 = ctx.getImageData(me1+40, sh1+40, me3, -1).data;
-		if(col1[0] >=250 && col1[me3*1-4] ==250 && col1[me3*2-4] ==250 && col1[me3*3-4] ==250 && col1[me3*4-4] ==250){
+		col1 = ctx.getImageData(me1+30, me5+120, me3, 20).data;
+		if(col1[0] >=250 && col1[me3*1-4] >=250 && col1[me3*2-4] >=250 && col1[me3*3-4] >=250 && col1[me3*4-4] >=250){
 			yoff+=charaspd;
 		}else if( (col1[0] < 179 && col1[2] >= 231) || (col1[me3*4-4] < 179 && col1[me3*4-2] >= 231) ){
 			gameOverStandard();
-		}else if(col1[0] == 252 && col1[1] == 164 && col1[2] == 79){
-			getOrange();
-		}else if(col1[0] == 38 && col1[1] == 104 && col1[2] == 167){
-			getBlue();
+		}else if(col1[0] == 211 && col1[1] == 143 && col1[2] == 254){
+			getPurple();
 		}else if(col1[0] < 250 && col1[me3*4-4] >=250){
 			xoff-=charaspd;
 			yoff-=charaspd;
@@ -332,16 +326,14 @@ function moving(){
 		}
 	}
 	if(down == true){
-		col1 = ctx.getImageData(me1+40, sh1+70 , me3, -1).data;
+		col1 = ctx.getImageData(me1+35, me5+150 , me3, -10).data;
 		
-		if(col1[0] ==250 && col1[me3*1-4] ==250 && col1[me3*2-4] ==250 && col1[me3*3-4] ==250 && col1[me3*4-4] ==250){
+		if(col1[0] >=250 && col1[me3*1-4] >=250 && col1[me3*2-4] >=250 && col1[me3*3-4] >=250 && col1[me3*4-4] >=250){
 			yoff-=charaspd;
 		}else if( (col1[me3*4-4] < 179 && col1[me3*4-2] >= 231) ){
 			gameOverStandard();
-		}else if(col1[0] == 252 && col1[1] == 164 && col1[2] == 79){
-			getOrange();
-		}else if(col1[0] == 38 && col1[1] == 104 && col1[2] == 167){
-			getBlue();
+		}else if(col1[0] == 211 && col1[1] == 143 && col1[2] == 254){
+			getPurple();
 		}else if(col1[0] < 250 && col1[me3*4-4] >=250){
 			xoff-=charaspd;
 			yoff+=charaspd;
@@ -366,7 +358,7 @@ function allFalse(){
 }
 
 function gameOverStandard(){
-	if(orange == true && blue == true){
+	if(purple == true){
 		standard = true;
 	}
 	if(standard == true){
@@ -376,14 +368,13 @@ function gameOverStandard(){
 		
 		
 		swal({
+			buttons:{
+				cancel:false,
+				confirm:true,
+			},
 			
-			background: '#000 url(//after_flower.png)',
-			timer : 3000
-			
+			timer: 2500
 		});
-		
-		$(".swal-modal").css('background-image', 'url(stop_goal.png)');
-		
 		
 		
 		
@@ -393,21 +384,23 @@ function gameOverStandard(){
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff+=10;
+		
 	}
 }
 
-function getOrange(){
-	if(orange == true){
+function getPurple(){
+	if(purple == true){
+		
 		// もうあつめてる
 		
 		swal({
+			buttons:{
+				cancel:false,
+				confirm:true,
+			},
 			
-			background: '#000 url(//after_flower.png)',
-			timer : 2500
-			
+			timer: 2500
 		});
-		
-		$(".swal-modal").css('background-image', 'url(after_flower.png)');
 		
 			allFalse();
 			clearInterval(rightCycle);
@@ -415,91 +408,51 @@ function getOrange(){
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff-=50;
+		
 	}else{
-		//オレンジ色の花をてにいれた
+		
+		
+		// むらさきの花を手に入れた
 		
 		swal({
+			buttons:{
+				cancel:false,
+				confirm:true,
+			},
 			
-			background: '#000 url(//after_flower.png)',
-			timer : 2500
+			timer: 2500
 		});
 		
-		$(".swal-modal").css('background-image', 'url(get_orange.png)');
 		
-		
-			orange = true;
+			purple = true;
 			allFalse();
 			clearInterval(rightCycle);
 			clearInterval(upCycle);
 			clearInterval(downCycle);
 			clearInterval(leftCycle);
 			yoff-=50;
+		
 	}
-			clearInterval(rightCycle);
-			clearInterval(upCycle);
-			clearInterval(downCycle);
-			clearInterval(leftCycle);
-}
-
-function getBlue(){
-	if(blue == true){
-		// もうあつめてる
-		
-		swal({
-			
-			background: '#000 url(//after_flower.png)',
-			timer : 2500
-			
-		});
-		
-		$(".swal-modal").css('background-image', 'url(after_flower.png)');
-		
-		
-		
-			allFalse();
-			clearInterval(rightCycle);
-			clearInterval(upCycle);
-			clearInterval(downCycle);
-			clearInterval(leftCycle);
-			yoff-=50;
-	}else{
-		//青色の花を手に入れた
-		swal({
-			
-			background: '#000 url(//after_flower.png)',
-			timer : 2500
-			
-		});
-		
-		$(".swal-modal").css('background-image', 'url(get_blue.png)');
-		
-		
-			blue = true;
-			allFalse();
-			clearInterval(rightCycle);
-			clearInterval(upCycle);
-			clearInterval(downCycle);
-			clearInterval(leftCycle);
-			yoff-=50;
-	}
-			clearInterval(rightCycle);
-			clearInterval(upCycle);
-			clearInterval(downCycle);
-			clearInterval(leftCycle);
+	clearInterval(rightCycle);
+	clearInterval(upCycle);
+	clearInterval(downCycle);
+	clearInterval(leftCycle);
 }
 
 function gameclear(){
-	<!--清除給定矩形内的像素(要清除矩形左上x座標,要清除矩形左上y座標,寬度,高度)-->
-	document.location.href="stage3.html";
+	<!--ステージ１をクリアしたらリンク先に飛ぶ-->
+	document.location.href="stage2.html";
 }
 
 function entrance(xx, yy){
 	xoff = xx;
 	yoff = yy;
 }
+<!--第二關結束-->
+function gameover(){
+	ending();
+}
 
-
-<!--訊息提示-->
 function sleep(d){
   for(var t = Date.now();Date.now() - t <= d;);
 }
